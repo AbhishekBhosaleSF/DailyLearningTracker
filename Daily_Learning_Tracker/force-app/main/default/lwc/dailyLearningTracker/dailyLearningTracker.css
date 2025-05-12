@@ -1,0 +1,12 @@
+.learning-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.learning-card {
+    background: #f4f6f9;
+    padding: 1rem;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: 300px;
+}

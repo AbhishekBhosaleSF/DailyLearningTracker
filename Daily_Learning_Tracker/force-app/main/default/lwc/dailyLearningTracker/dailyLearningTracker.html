@@ -1,0 +1,49 @@
+<template>
+    <lightning-card title="Daily Learning Tracker" icon-name="standard:education">
+        <div class="slds-p-around_medium">
+            <!-- Add New / Edit Form -->
+            <template if:true={showForm}>
+                <div class="slds-box slds-theme_default slds-m-bottom_medium">
+                    <lightning-input label="Learning Date" type="date" value={form.Learning_Date__c} onchange={handleInputChange} data-field="Learning_Date__c"></lightning-input>
+
+                    <lightning-combobox label="Topic" value={form.Topic__c} options={topicOptions} onchange={handleInputChange} data-field="Topic__c"></lightning-combobox>
+
+                    <lightning-input label="Concept" value={form.Concept__c} onchange={handleInputChange} data-field="Concept__c"></lightning-input>
+
+                    <lightning-textarea label="Description" value={form.Description__c} onchange={handleInputChange} data-field="Description__c"></lightning-textarea>
+
+                    <lightning-combobox label="Status" value={form.Status__c} options={statusOptions} onchange={handleInputChange} data-field="Status__c"></lightning-combobox>
+
+                    <div class="slds-m-top_medium">
+                        <lightning-button label="Save" variant="brand" onclick={handleSave}></lightning-button>
+                        <lightning-button label="Cancel" variant="neutral" onclick={handleCancel} class="slds-m-left_small"></lightning-button>
+                    </div>
+                </div>
+            </template>
+
+            <lightning-button label="Add New Learning" onclick={handleAdd} class="slds-m-bottom_medium"></lightning-button>
+
+            <!-- Display Records -->
+            <template if:true={learnings}>
+                <div class="slds-grid slds-wrap">
+                    <template for:each={learnings} for:item="learning">
+                        <div key={learning.Id} class="slds-col slds-size_1-of-2 slds-p-around_small">
+                            <lightning-card title={learning.Concept__c} icon-name="standard:knowledge">
+                                <div class="slds-p-horizontal_medium slds-p-vertical_small">
+                                    <p><strong>Date:</strong> {learning.Learning_Date__c}</p>
+                                    <p><strong>Topic:</strong> {learning.Topic__c}</p>
+                                    <p><strong>Description:</strong> {learning.Description__c}</p>
+                                    <p><strong>Status:</strong> {learning.Status__c}</p>
+                                </div>
+                                <div class="slds-p-horizontal_medium slds-m-bottom_small">
+                                    <lightning-button label="Edit" variant="brand" data-id={learning.Id} onclick={handleEdit}></lightning-button>
+                                    <lightning-button label="Delete" variant="destructive" data-id={learning.Id} onclick={handleDelete} class="slds-m-left_small"></lightning-button>
+                                </div>
+                            </lightning-card>
+                        </div>
+                    </template>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
