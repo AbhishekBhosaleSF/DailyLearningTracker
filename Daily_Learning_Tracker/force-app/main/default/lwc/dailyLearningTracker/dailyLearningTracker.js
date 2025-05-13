@@ -25,19 +25,33 @@ export default class DailyLearningTracker extends LightningElement {
     ];
 
     statusOptions = [
-        { label: 'Learning', value: 'Learning' },
+        { label: 'In progress', value: 'In progress' },
         { label: 'Completed', value: 'Completed' },
-        { label: 'Have to Learn', value: 'Have to Learn' }
+        { label: 'Have to Learn', value: 'Have to Learn' },
+        { label: 'Having Issue', value: 'Having Issue' }
     ];
 
     connectedCallback() {
         this.loadLearnings();
     }
 
+    // Inject rich HTML from Description__c into the DOM after render
+    renderedCallback() {
+        this.learnings.forEach(learning => {
+            const div = this.template.querySelector(`div[data-id="${learning.Id}"]`);
+            if (div) {
+                div.innerHTML = learning.Description__c || '';
+            }
+        });
+    }
+
     loadLearnings() {
         getDailyLearnings()
             .then(data => this.learnings = data)
-            .catch(error => console.error('Error loading records', error));
+            .catch(error => {
+                console.error('Error loading records', error);
+                this.showToast('Error', 'Failed to load learning records.', 'error');
+            });
     }
 
     handleAdd() {
@@ -59,19 +73,34 @@ export default class DailyLearningTracker extends LightningElement {
                 this.showToast('Deleted', 'Learning entry deleted', 'success');
                 this.loadLearnings();
             })
-            .catch(error => console.error('Delete error', error));
+            .catch(error => {
+                console.error('Delete error', error);
+                this.showToast('Error', 'Failed to delete record.', 'error');
+            });
     }
 
     handleInputChange(event) {
         const field = event.target.dataset.field;
-        this.form[field] = event.target.value;
+        const value = event.target.value;
+
+        this.form = {
+            ...this.form,
+            [field]: value
+        };
     }
 
     handleSave() {
         const isUpdate = this.form.Id !== null;
         const action = isUpdate ? updateDailyLearning : createDailyLearning;
 
-        action({ learning: this.form })
+        const learningRecord = {
+            ...this.form,
+            Learning_Date__c: this.form.Learning_Date__c
+                ? this.form.Learning_Date__c
+                : null
+        };
+
+        action({ learning: learningRecord })
             .then(() => {
                 const msg = isUpdate ? 'Learning updated' : 'New learning added';
                 this.showToast('Success', msg, 'success');
@@ -81,7 +110,7 @@ export default class DailyLearningTracker extends LightningElement {
                 this.loadLearnings();
             })
             .catch(error => {
-                console.error('Save error', error);
+                console.error('Save error', JSON.stringify(error));
                 this.showToast('Error', 'Something went wrong while saving', 'error');
             });
     }

@@ -1,12 +1,172 @@
-.learning-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+.slds-box {
+    background-color: #f7f9fc;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
+
+lightning-input,
+lightning-combobox,
+lightning-textarea {
+    margin-bottom: 1rem;
+}
+
+.slds-card {
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    background-color: #ffffff;
+    transition: transform 0.2s;
+}
+
+.slds-card:hover {
+    transform: translateY(-3px);
+}
+
+.card-content {
+    padding: 1rem 1.5rem;
+}
+
+.card-actions lightning-button {
+    margin-right: 0.5rem;
+}
+
+.add-button {
+    margin-bottom: 1.5rem;
+}
+
+/* === Container Grid === */
+.slds-grid.slds-wrap {
+    gap: 1.5rem;
+    justify-content: flex-start;
+}
+
+/* === Individual Card Column === */
+.slds-col {
+    transition: transform 0.3s ease;
+}
+
+.slds-col:hover {
+    transform: translateY(-5px);
+}
+
+/* === lightning-card Enhancements === */
+lightning-card {
+    border-radius: 1rem;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.07);
+    overflow: hidden;
+    background-color: #ffffff;
+    display: block;
+}
+
+/* === Record Content === */
+.card-content {
+    padding: 1.25rem 1.5rem;
+    background-color: #f9fbfc;
+    border-bottom: 1px solid #e3e7ea;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.card-content p {
+    margin: 0.4rem 0;
+    line-height: 1.5;
+}
+
+/* === Action Buttons Row === */
+.card-actions {
+    padding: 1rem 1.5rem;
+    background-color: #fff;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    border-top: 1px solid #e3e7ea;
+}
+
+/* === Buttons === */
+.card-actions lightning-button:nth-child(1) {
+    --slds-c-button-brand-color-background: #0070d2;
+}
+
+.card-actions lightning-button:nth-child(2) {
+    --slds-c-button-destructive-color-background: #c23934;
+}
+
+/* === Responsive Columns for Small Screens === */
+@media screen and (max-width: 768px) {
+    .slds-col {
+        flex: 0 0 100%;
+    }
+}
+
+
+.learning-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
 .learning-card {
-    background: #f4f6f9;
-    padding: 1rem;
-    border-radius: 6px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    width: 300px;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s;
+}
+
+.learning-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 0.75rem;
+}
+
+.card-body h3 {
+    font-size: 1.1rem;
+    margin: 0.2rem 0 0.5rem;
+}
+
+.card-body p {
+    font-size: 0.95rem;
+    color: #444;
+    line-height: 1.5;
+}
+
+.card-footer {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.status-badge {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    border-radius: 0.5rem;
+    color: white;
+}
+
+.status-completed {
+    background-color: #28a745;
+}
+
+.status-in\ progress {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.status-have\ to\ learn {
+    background-color: #007bff;
+}
+
+.status-having\ issue {
+    background-color: #dc3545;
 }

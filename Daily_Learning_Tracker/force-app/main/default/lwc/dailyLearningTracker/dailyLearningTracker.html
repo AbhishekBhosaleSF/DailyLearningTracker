@@ -1,6 +1,7 @@
 <template>
     <lightning-card title="Daily Learning Tracker" icon-name="standard:education">
         <div class="slds-p-around_medium">
+
             <!-- Add New / Edit Form -->
             <template if:true={showForm}>
                 <div class="slds-box slds-theme_default slds-m-bottom_medium">
@@ -21,7 +22,8 @@
                 </div>
             </template>
 
-            <lightning-button label="Add New Learning" onclick={handleAdd} class="slds-m-bottom_medium"></lightning-button>
+            <!-- Add Button -->
+            <lightning-button label="Add New Learning" onclick={handleAdd} class="add-button"></lightning-button>
 
             <!-- Display Records -->
             <template if:true={learnings}>
@@ -29,21 +31,25 @@
                     <template for:each={learnings} for:item="learning">
                         <div key={learning.Id} class="slds-col slds-size_1-of-2 slds-p-around_small">
                             <lightning-card title={learning.Concept__c} icon-name="standard:knowledge">
-                                <div class="slds-p-horizontal_medium slds-p-vertical_small">
+                                <div class="card-content">
                                     <p><strong>Date:</strong> {learning.Learning_Date__c}</p>
                                     <p><strong>Topic:</strong> {learning.Topic__c}</p>
-                                    <p><strong>Description:</strong> {learning.Description__c}</p>
+                                    <div>
+                                        <p><strong>Description:</strong></p>
+                                        <div lwc:dom="manual" class="description-content" data-id={learning.Id}></div>
+                                    </div>
                                     <p><strong>Status:</strong> {learning.Status__c}</p>
                                 </div>
-                                <div class="slds-p-horizontal_medium slds-m-bottom_small">
+                                <div class="card-actions slds-p-horizontal_medium slds-m-bottom_small">
                                     <lightning-button label="Edit" variant="brand" data-id={learning.Id} onclick={handleEdit}></lightning-button>
-                                    <lightning-button label="Delete" variant="destructive" data-id={learning.Id} onclick={handleDelete} class="slds-m-left_small"></lightning-button>
+                                    <lightning-button label="Delete" variant="destructive" data-id={learning.Id} onclick={handleDelete}></lightning-button>
                                 </div>
                             </lightning-card>
                         </div>
                     </template>
                 </div>
             </template>
+
         </div>
     </lightning-card>
 </template>
