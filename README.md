@@ -1,7 +1,7 @@
 # DailyLearningTracker
 Daily Learning Tracker (Salesforce LWC Project)
 Project Overview:
- The Daily Learning Tracker is a custom Salesforce Lightning Web Component (LWC) application designed to help users log, monitor, and manage their daily learning activities. This project was built to promote continuous skill development and track learning progress efficiently within the Salesforce ecosystem.
+The Daily Learning Tracker is a custom Salesforce Lightning Web Component (LWC) application designed to help users log, monitor, and manage their daily learning activities. This project was built to promote continuous skill development and track learning progress efficiently within the Salesforce ecosystem.
 
 Key Features:
    
